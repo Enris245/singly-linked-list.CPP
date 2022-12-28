@@ -1,0 +1,252 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+void insertatend();
+void insertatbeg();
+void delfromfirst();
+void delfromend();
+void insertatloc();
+void delfromspec();
+
+struct node
+{
+	int data;
+	struct node* link;
+}*start;
+int menu();
+struct node *createnode()
+{
+	struct node*n;
+	n=(struct node*)malloc(sizeof(struct node));
+	return n;
+}
+void insertnode()
+{
+	
+	int choice;
+	struct node*temp;
+	temp = createnode();
+	if(temp==NULL)
+	printf("list is overflow");
+		if(start==NULL)
+	{
+	printf("Enter value to be added");
+	scanf("%d",&temp->data);
+	start =temp;
+	temp->link =NULL;
+}
+else
+{
+
+	printf("1. insert at beginning");
+	printf("\n2.insert at end");
+	printf("\n3. insert at specific location");
+	
+	printf("\n hi, in select an option\n");
+	scanf("%d",&choice);
+	switch(choice)
+	{
+		case 1:
+			insertatbeg();
+			break;
+		case 2:
+			insertatend();
+			break;
+		case 3:
+			insertatloc();
+			break;
+		default:
+			printf("enter a valid choice");
+		
+		
+	}
+	
+}
+}
+ void insertatloc(){
+	int x;
+	struct node*mango;
+	struct node*hi;
+	mango=createnode();
+	int num;
+	printf("Enter a number after which you have to add that number");
+	scanf("%d",&num);
+	printf("Enter the number you have to enter");
+	scanf("%d",&x);
+	struct node *temp;
+	mango->data=x;
+	temp = start;
+	while(temp->data!=num)
+	{
+	temp=temp->link;
+	}
+	mango->link=temp->link;
+	temp->link=mango;
+}
+void insertatend()
+{
+	struct node*temp;
+	
+	temp = createnode();
+	
+	struct node*a;
+	
+	
+	printf("enter the value to be added");
+	scanf("%d",&temp->data);
+	if(temp==NULL)
+	printf("list is overflow");
+	a=start;
+	while(a->link!=NULL)
+		a =a->link;
+	
+	a->link=temp;
+	temp->link=NULL;
+}
+void insertatbeg()
+{
+	struct node*temp;
+	
+	temp = createnode();
+	
+	
+	printf("enter the value to be added");
+	scanf("%d",&temp->data);
+	if(temp==NULL)
+	printf("list is overflow");
+	temp->link = start;
+	start=temp;
+}
+void delnode()
+{
+	if(start==NULL){
+	
+	printf("list is underflow");
+	getch();
+}
+	else
+	{
+		int choice;
+		printf("\n 1. delete a node from end");
+		printf("\n2.delete a node from begining");
+		printf("\n3.delete from a specific location");
+		printf("\nEnter a choice");
+		scanf("%d",&choice);
+		switch(choice)
+		{
+			case 1:
+				delfromend();
+				break;
+			case 2:
+				delfromfirst();
+				break;
+				case 3:
+					delfromspec();
+					break;
+			default:
+				printf("choose a valid answer");
+		}
+	
+}}
+void delfromspec()
+{
+	struct node *x,*temp;
+	int num;
+	printf("Enter the number after which you have to del");
+	scanf("%d",&num);
+	temp=start;
+    
+	while(temp->data!=num)
+	{
+		temp=temp->link;
+	}
+	x=temp->link;
+	temp->link=x->link ;
+	printf("deleted value is %d",x->data);
+	free(x);
+	getch();
+	
+}
+void delfromfirst()
+{
+	
+	struct node*del;
+	del = start;
+	start = start->link;
+	printf("deleted value is %d",del->data);
+	free(del);
+	getch();
+}
+void delfromend()
+{
+	struct node*del,*apple;
+	del = start;
+	while(del->link!=0)
+
+{
+		apple=del;
+	del = del->link;}
+	apple->link = 0;
+	printf("deleted value is %d",del->data);
+	free(del);
+	getch();
+	
+}
+void display()
+{
+
+if(start==NULL)
+printf("list is empty");
+else
+{
+
+	struct node*p;
+	p=start;
+	while(p!=NULL)
+	{
+	
+	printf("%d\n",p->data);
+	p=p->link;
+}}
+getch();}
+ main()
+{
+	
+	printf("hi");
+	while(1)
+	{
+		system("cls");
+		switch(menu())
+		{
+			case 1:
+				insertnode();
+				break;
+				case 2:
+					delnode();
+					break;
+					case 3:
+						display();
+						break;
+						case 4:
+							return(0);
+						default:
+							printf("Enter a valid choice");
+							getch();
+		}
+	}
+	
+}
+int menu()
+{
+	int choice;
+	printf("\n\t\t\tJai Jinendra!!\n");
+	printf("\n1. Insert a node\n");
+	printf("\n 2. Del a node\n");
+	printf(" \n3.display the values of node\n");
+	printf("\n4.for exit\n");
+	printf("\nenter your choice\n");
+	scanf("%d",&choice);
+	return(choice);
+	
+}
+	
